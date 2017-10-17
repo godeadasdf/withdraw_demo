@@ -4,7 +4,6 @@ import {
   Button,
   View,
   StyleSheet,
-  ToastAndroid
 } from 'react-native';
 
 //todo button background属性替换
