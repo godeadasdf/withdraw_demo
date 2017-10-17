@@ -1,0 +1,3 @@
+rootProject.name = 'withdraw_demo'
+
+include ':app'
