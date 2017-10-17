@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import WithdrawCard from './app/components/withdrawcard';
+import PersonalInfo from './app/components/personalinfo';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,6 +25,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
+        <PersonalInfo/>
        <WithdrawCard/>
       </View>
     );
