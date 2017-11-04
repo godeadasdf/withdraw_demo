@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import WithdrawCard from './app/components/withdrawcard';
 import PersonalInfo from './app/components/personalinfo';
+import TableBarWithAnim from './app/components/TableBarWithAnim';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -26,7 +28,8 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <PersonalInfo/>
-       <WithdrawCard/>
+        <TableBarWithAnim
+          title={['趋势图', '各区域排行']}/>
       </View>
     );
   }

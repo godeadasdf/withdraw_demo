@@ -1,26 +1,47 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  Text,
-  Button,
   View,
-  StyleSheet,
+  Text,
+  Image,
+  StyleSheet
 } from 'react-native';
 
-//todo button background属性替换
-export default class WithdrawCard extends Component {
+export default class SilentBikeDetail extends Component {
+
+
+  renderImage(list) {
+    return list.map(item => {
+      return (<Image style={styles.image}
+                     source={require('../images/avatar.png')}>
+      </Image>);
+    });
+
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.viewForTextStyle}>
-          <Text style={styles.text}>提现记录</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>沉默车详情</Text>
+          <Image style={styles.close}
+                 source={require('../images/close.png')}/>
         </View>
-        <Text style={styles.balanceTitle}>  余额（元）</Text>
-        <Text style={styles.balanceNumber}>0.00</Text>
-        <View style={styles.viewForButtonStyle}>
-          <Text onPress={() => {
-            console.log('click');
-          }}
-                style={styles.button}>提现</Text>
+        <View style={styles.divide}></View>
+        <View style={styles.numberContainer}>
+          <Text style={styles.content}>车牌号：</Text>
+          <Text style={styles.bikeno}>8474832</Text>
+        </View>
+        <Text style={styles.content}>上报地址：海淀黄庄地铁A口</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={[styles.content, {flex: 1}]}>上报时间：10月30日 10:30</Text>
+          <Text style={styles.timeout}>超过36小时</Text>
+        </View>
+        <View style={styles.imageContainer}>
+        {this.renderImage([1,2])}
+        </View>
+        <View style={styles.button}>
+
         </View>
       </View>
     );
@@ -28,59 +49,69 @@ export default class WithdrawCard extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    height: 214,
-    flexDirection: 'column'
-  },
-  viewForTextStyle: {
-    height: 28,
-    width: 78,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'flex-end',
-    marginRight: 16,
-    marginTop: 16,
-    borderWidth: 1,
-    borderColor: '#979797',
-    borderRadius: 39,
-  },
-  text: {
-    color: '#666666',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  balanceTitle: {
-    marginTop: 12,
-    color: '#000',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    
-  },
-  balanceNumber: {
-    marginTop: 6,
-    color: '#000',
-    fontSize: 40,
-    textAlign: 'center',
-    fontWeight: 'bold'
-    
-  },
-  viewForButtonStyle: {
-    marginTop:10,
-    height: 48,
-    marginRight:16,
-    marginLeft:16,
-    justifyContent: 'center',
-    alignSelf:'stretch',
-    borderRadius: 3,
-    backgroundColor: '#3DA0FA',
-  },
-  button: {
-    textAlign: 'center',
-    color: '#fff',
-    fontSize: 16,
-    fontWeight:'bold'
+    container: {
+      backgroundColor: '#FFFFFF',
+      alignSelf: 'stretch'
+    },
+    titleContainer: {
+      flexDirection: 'row',
+      height: 72
+    },
+    title: {
+      flex: 1,
+      marginTop: 30,
+      fontSize: 18,
+      textAlign: 'center',
+      color: '#333333'
+    },
+    close: {
+      width: 14,
+      height: 14,
+      top: 32,
+      right: 24,
+      position: 'absolute'
+    },
+    divide: {
+      backgroundColor: '#CCCCCC',
+      height: 1
+    },
+    numberContainer: {
+      marginTop: 30,
+      flexDirection: 'row'
+    },
+    bikeno: {
+      color: '#333333',
+      fontSize: 18,
+      backgroundColor: '#fff'
+    },
+    content: {
+      marginLeft: 24,
+      marginTop: 17,
+      color: '#292929',
+      fontSize: 14
+    },
+    timeout: {
+      color: '#FF7B00',
+      fontSize: 14,
+      marginTop: 17,
+      position: 'relative',
+      right: 16
+    },
+    imageContainer: {
+      marginTop: 30,
+      marginLeft: 7,
+      marginRight: 20,
+      flexDirection: 'row'
+    },
+    image: {
+      width: 98,
+      height: 98,
+      marginLeft: 13,
+    },
+    button: {
+      marginTop: 24,
+      height: 54,
+      backgroundColor: '#3DA0FA'
+    }
   }
-});
+);
