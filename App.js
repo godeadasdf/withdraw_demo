@@ -29,7 +29,8 @@ export default class App extends Component<{}> {
       <View style={styles.container}>
         <PersonalInfo/>
         <TableBarWithAnim
-          title={['趋势图', '各区域排行']}/>
+          titleBottom={['趋势图', '各区域排行']}
+          titleTop={['鉴定车', '问题车','低电车','沉默车']}/>
       </View>
     );
   }

@@ -11,23 +11,39 @@ export default class TableBarWithAnim extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      indexChosen: 0
+      indexChoseTop: 0,
+      indexChoseBottom: 0
     };
   }
 
-  renderItem = (title, index) => {
-    console.log(title, index);
+  renderTopItem = (titleTop, index) => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          this.setState({indexChosen: index});
+          this.setState({indexChoseTop: index});
         }}>
-        <View style={styles.textContainer}>
-          <Text style={index == this.state.indexChosen ?
-            styles.textChosen : styles.textNormal}>
-            {title}
+        <View style={styles.textContainerTop}>
+          <Text style={index == this.state.indexChoseTop ?
+            styles.textChosenWhite : styles.textNormalWhite}>
+            {titleTop}
           </Text>
-          {index == this.state.indexChosen ?
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
+
+  renderBottomItem = (titleBottom, index) => {
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          this.setState({indexChoseBottom: index});
+        }}>
+        <View style={styles.textContainerBottom}>
+          <Text style={index == this.state.indexChoseBottom ?
+            styles.textChosenBlack : styles.textNormalBlack}>
+            {titleBottom}
+          </Text>
+          {index == this.state.indexChoseBottom ?
             <View style={styles.line}/> : null}
         </View>
       </TouchableWithoutFeedback>
@@ -35,14 +51,22 @@ export default class TableBarWithAnim extends Component {
   };
 
   render() {
-    console.log(this.props.title);
     return (
-      <View style={styles.container}>
-        {this.props.title
-        && this.props.title.length > 0 ?
-          this.props.title.map((item, index) =>
-            this.renderItem(item, index)
-          ) : null}
+      <View style={{flexDirection: 'column'}}>
+        <View style={styles.container}>
+          {this.props.titleTop
+            && this.props.titleTop.length > 0 ?
+              this.props.titleTop.map((item, index) =>
+                this.renderTopItem(item, index)
+              ) : null}
+        </View>
+        <View style={styles.container}>
+          {this.props.titleBottom
+          && this.props.titleBottom.length > 0 ?
+            this.props.titleBottom.map((item, index) =>
+              this.renderBottomItem(item, index)
+            ) : null}
+        </View>
       </View>
     );
   }
@@ -50,16 +74,20 @@ export default class TableBarWithAnim extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:16,
     flexDirection: 'row',
-    flex: 1
   },
-  textContainer: {
+  textContainerTop:{
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  textContainerBottom: {
     height: 48,
     flex: 1,
     backgroundColor: '#FAFAFA',
     flexDirection: 'column',
     alignItems: 'center'
-
   },
   line: {
     width: 90,
@@ -68,15 +96,27 @@ const styles = StyleSheet.create({
     top: 46,
     backgroundColor: '#484D5D',
   },
-  textNormal: {
+  textNormalBlack: {
     marginTop: 18,
     fontSize: 14,
     color: '#666666'
   },
-  textChosen: {
+  textChosenBlack: {
     marginTop: 18,
     fontSize: 14,
     color: '#484D5D',
+    fontWeight: 'bold'
+  },
+  textNormalWhite: {
+    marginTop: 18,
+    fontSize: 14,
+    color: '#FFFFFF',
+    opacity: 0.6
+  },
+  textChosenWhite: {
+    marginTop: 18,
+    fontSize: 14,
+    color: '#FFFFFF',
     fontWeight: 'bold'
   }
 
