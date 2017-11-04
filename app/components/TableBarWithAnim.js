@@ -16,32 +16,40 @@ export default class TableBarWithAnim extends Component {
     };
   }
 
-  renderTopItem = (titleTop, index) => {
+  componentWillMount() {
+    this.props.doSome(this.props.titleBottom[0] + this.props.titleTop[0]);
+  }
+
+  renderTopItem = (item, index) => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
           this.setState({indexChoseTop: index});
+          this.props.doSome(this.props.titleBottom[this.state.indexChoseBottom]
+            + this.props.titleTop[index]);
         }}>
         <View style={styles.textContainerTop}>
           <Text style={index == this.state.indexChoseTop ?
             styles.textChosenWhite : styles.textNormalWhite}>
-            {titleTop}
+            {item}
           </Text>
         </View>
       </TouchableWithoutFeedback>
     );
   };
 
-  renderBottomItem = (titleBottom, index) => {
+  renderBottomItem = (item, index) => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
           this.setState({indexChoseBottom: index});
+          this.props.doSome(this.props.titleBottom[index]
+            + this.props.titleTop[this.state.indexChoseTop]);
         }}>
         <View style={styles.textContainerBottom}>
           <Text style={index == this.state.indexChoseBottom ?
             styles.textChosenBlack : styles.textNormalBlack}>
-            {titleBottom}
+            {item}
           </Text>
           {index == this.state.indexChoseBottom ?
             <View style={styles.line}/> : null}
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
   textContainerTop:{
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textContainerBottom: {
     height: 48,

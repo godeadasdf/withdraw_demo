@@ -30,11 +30,18 @@ export default class App extends Component<{}> {
         <PersonalInfo/>
         <TableBarWithAnim
           titleBottom={['趋势图', '各区域排行']}
-          titleTop={['鉴定车', '问题车','低电车','沉默车']}/>
+          titleTop={['鉴定车', '问题车','低电车','沉默车']}
+          doSome={this.doSome}
+        />
       </View>
     );
   }
+
+  doSome = (url) => {
+    console.log(url);
+  };
 }
+
 
 const styles = StyleSheet.create({
   container: {
