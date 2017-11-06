@@ -30,14 +30,14 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <PersonalInfo/>
-        {/*<ScrollViewStudy/>*/}
-        <SingleAxisChart
+        <ScrollViewStudy/>
+        {/*<SingleAxisChart
           data={[
             {id: 1, num: 560},
             {id: 2, num: 900},
             {id: 3, num: 823},
             {id: 4, num: 1010}
-          ]}/>
+          ]}/>*/}
       </View>
     );
   }
