@@ -34,15 +34,14 @@ export default class SingleAxisChart extends Component {
           {
             data.map((item, index) => {
               let width = data[index].ratio * this.state.maxLength;
-              console.log(width);
-              console.log(this.state.maxLength);
               return index > 0 ? <View>
                 <Text style={styles.textTitle}>{titles[index]}</Text>
                 <View style={styles.item_container}>
                   <View ref='top' style={{
                     backgroundColor: '#FDE000',
                     width: width,
-                    height: 12
+                    height: 12,
+                    borderRadius: 10,
                   }}/>
                   <Text style={styles.textNumber}>{data[index].num}</Text>
                 </View></View> : null;
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
   item_container: {
     marginTop: 8,
     flexDirection: 'row',
+    alignItems:'center'
   },
   topOne: {
     flex: 1,
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     marginTop: 17,
-    marginLeft: 8,
     marginRight: 16,
     fontSize: 12
   },
