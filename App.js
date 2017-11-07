@@ -29,15 +29,23 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <PersonalInfo/>
-        <ScrollViewStudy/>
-        {/*<SingleAxisChart
-          data={[
+        {/*<PersonalInfo/>
+        <ScrollViewStudy/>*/}
+        <SingleAxisChart
+          data={{
+            number: [
             {id: 1, num: 560},
             {id: 2, num: 900},
             {id: 3, num: 823},
             {id: 4, num: 1010}
-          ]}/>*/}
+            ], titles: [
+              '北京海淀黄庄地铁站A口',
+              '北京中关村地铁站A口',
+              '北京知春路地铁站B口',
+              '北京中关村购物中心'
+            ]
+          }}
+        />
       </View>
     );
   }

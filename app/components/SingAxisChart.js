@@ -15,9 +15,12 @@ export default class SingleAxisChart extends Component {
   }
   
   render() {
-    const data = this.sort(this.props.data);
+    const data = this.sort(this.props.data.number);
+    const titles = this.props.data.titles;
     return (
       <View style={styles.container}>
+        <View>
+          <Text>{titles[0]}</Text>
         <View style={styles.item_container}>
           <View
             onLayout={({nativeEvent: e}) => {
@@ -26,15 +29,22 @@ export default class SingleAxisChart extends Component {
             ref='topOne' style={styles.topOne}/>
           <Text>{data[ 0 ].num}</Text>
         </View>
+        </View>
         {
           data.map((item, index) => {
             let width = data[ index ].ratio * this.state.maxLength;
             console.log(width);
             console.log(this.state.maxLength);
-            return index > 0 ? <View style={styles.item_container}>
-              <View ref='top' style={{backgroundColor: 'yellow', width: width}}/>
+            return index > 0 ? <View>
+              <Text>{titles[index]}</Text>
+              <View style={styles.item_container}>
+                <View ref='top' style={{
+                  backgroundColor: '#FDE000',
+                  width: width,
+                  height: 12
+                }}/>
               <Text>{data[ index ].num}</Text>
-            </View> : null;
+              </View></View> : null;
           })}
       </View>
     );
@@ -64,15 +74,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   item_container: {
-    height: 100,
+    height: 37,
     flexDirection: 'row',
   },
   topOne: {
     flex: 1,
-    backgroundColor: 'yellow'
+    height: 12,
+    backgroundColor: '#FDE000'
   },
-  notTopOne: {
-    backgroundColor: 'yellow',
-    width: 100
+  text: {
+    marginLeft: 8,
+    marginRight: 16,
+    fontSize: 12
   }
 });
