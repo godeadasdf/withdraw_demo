@@ -10,13 +10,15 @@ export default class SingleAxisChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxLength: -1
+      maxLength: -1,
     };
   }
   
   render() {
     const data = this.sort(this.props.data.number);
-    const titles = this.props.data.titles;
+    const titles = this.props.data.titles || [];
+    const isDualLine = this.props.dualLine;
+    const dualLengthFirst = this.state.maxLength > 0 ? this.state.maxLength * data[0].percent : 0;
     return (
       data && data.length > 0 ?
         <View style={styles.container}>
@@ -30,10 +32,23 @@ export default class SingleAxisChart extends Component {
                 ref='topOne' style={styles.topOne}/>
               <Text style={styles.textNumber}>{data[0].num}</Text>
             </View>
+            {isDualLine == true ?
+              <View style={styles.item_container}>
+                <View style={{
+                  height: 12,
+                  backgroundColor: '#DEDEDE',
+                  borderRadius: 10,
+                  width: dualLengthFirst
+                }}/>
+                <Text style={styles.textNumber}>
+                  {data[0].percent * 100 + '%'}
+                </Text>
+              </View> : null}
           </View>
           {
             data.map((item, index) => {
               let width = data[index].ratio * this.state.maxLength;
+              let dualWidth = data[index].percent ? data[index].percent * width : 0;
               return index > 0 ? <View>
                 <Text style={styles.textTitle}>{titles[index]}</Text>
                 <View style={styles.item_container}>
@@ -43,8 +58,23 @@ export default class SingleAxisChart extends Component {
                     height: 12,
                     borderRadius: 10,
                   }}/>
-                  <Text style={styles.textNumber}>{data[index].num}</Text>
-                </View></View> : null;
+                  <Text style={styles.textNumber}>
+                    {data[index].num}
+                  </Text>
+                </View>
+                {isDualLine == true ?
+                  <View style={styles.item_container}>
+                    <View style={{
+                      height: 12,
+                      backgroundColor: '#DEDEDE',
+                      borderRadius: 10,
+                      width: dualWidth
+                    }}/>
+                    <Text style={styles.textNumber}>
+                      {data[index].percent * 100 + '%'}
+                    </Text>
+                  </View> : null}
+              </View> : null;
             })}
         </View> : null
     );
@@ -85,6 +115,12 @@ const styles = StyleSheet.create({
     height: 12,
     backgroundColor: '#FDE000',
     borderRadius: 10,
+  },
+  dualLine: {
+    height: 12,
+    backgroundColor: '#DEDEDE',
+    borderRadius: 10,
+    marginTop: 8,
   },
   textTitle: {
     marginTop: 17,

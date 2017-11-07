@@ -34,10 +34,10 @@ export default class App extends Component<{}> {
         <SingleAxisChart
           data={{
             number: [
-            {id: 1, num: 560},
-            {id: 2, num: 900},
-            {id: 3, num: 823},
-            {id: 4, num: 1010}
+              {id: 1, num: 560, percent: 0.77},
+              {id: 2, num: 900, percent: 0.80},
+              {id: 3, num: 823, percent: 0.90},
+              {id: 4, num: 1010, percent: 0.59}
             ], titles: [
               '北京海淀黄庄地铁站A口',
               '北京中关村地铁站A口',
@@ -45,6 +45,8 @@ export default class App extends Component<{}> {
               '北京中关村购物中心'
             ]
           }}
+          dualLine={true}
+
         />
       </View>
     );
