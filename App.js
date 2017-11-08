@@ -43,6 +43,10 @@ export default class App extends Component<{}> {
               '北京中关村地铁站A口',
               '北京知春路地铁站B口',
               '北京中关村购物中心'
+            ],
+            topTitles:[
+              '问题车',
+              '问题车入库率'
             ]
           }}
           dualLine={true}

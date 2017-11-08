@@ -19,9 +19,16 @@ export default class SingleAxisChart extends Component {
     const titles = this.props.data.titles || [];
     const isDualLine = this.props.dualLine;
     const dualLengthFirst = this.state.maxLength > 0 ? this.state.maxLength * data[0].percent : 0;
+    const topTitles = this.props.data.topTitles || [];
     return (
       data && data.length > 0 ?
         <View style={styles.container}>
+          <View style={{flexDirection: 'row',alignItems:'center'}}>
+            <View style={{width: 8, height: 8, borderRadius: 8, backgroundColor: '#FDE000'}}/>
+            <Text style={styles.topTitle}>{topTitles[0]}</Text>
+            <View style={{width: 8, height: 8, borderRadius: 8, backgroundColor: '#DEDEDE',marginLeft:30}}/>
+            <Text style={styles.topTitle}>{topTitles[1]}</Text>
+          </View>
           <View>
             <Text style={styles.textTitle}>{titles[0]}</Text>
             <View style={styles.item_container}>
@@ -132,5 +139,10 @@ const styles = StyleSheet.create({
     marginRight: 16,
     fontSize: 12,
     fontWeight:'bold'
+  },
+  topTitle:{
+    fontSize:12,
+    color:'#292929',
+    marginLeft:8
   }
 });
