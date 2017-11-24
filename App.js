@@ -16,6 +16,7 @@ import PersonalInfo from './app/components/personalinfo';
 import TableBarWithAnim from './app/components/TableBarWithAnim';
 import ScrollViewStudy from './app/components/ScrollViewStudy';
 import SingleAxisChart from './app/components/SingAxisChart';
+import CheckText from './app/components/CheckText';
 
 
 const instructions = Platform.select({
@@ -31,7 +32,7 @@ export default class App extends Component<{}> {
       <View style={styles.container}>
         {/*<PersonalInfo/>
         <ScrollViewStudy/>*/}
-        <SingleAxisChart
+        {/* <SingleAxisChart
           data={{
             number: [
               {id: 1, num: 560, percent: 0.77},
@@ -51,6 +52,13 @@ export default class App extends Component<{}> {
           }}
           dualLine={true}
 
+        />*/}
+        <CheckText
+          onPress={(id,state)=>{
+            console.log(id,state);
+          }}
+          id={101}
+          partname='前把'
         />
       </View>
     );
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    alignItems: 'stretch',
+    alignItems:'flex-start',
     backgroundColor: '#436',
   },
 });
