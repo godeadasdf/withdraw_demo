@@ -17,6 +17,7 @@ import TableBarWithAnim from './app/components/TableBarWithAnim';
 import ScrollViewStudy from './app/components/ScrollViewStudy';
 import SingleAxisChart from './app/components/SingAxisChart';
 import CheckText from './app/components/CheckText';
+import PartSelection from './app/components/PartSelection';
 
 
 const instructions = Platform.select({
@@ -53,12 +54,14 @@ export default class App extends Component<{}> {
           dualLine={true}
 
         />*/}
-        <CheckText
-          onPress={(id,state)=>{
-            console.log(id,state);
-          }}
+{/*        <CheckText
           id={101}
           partname='前把'
+        />*/}
+        <PartSelection
+          partname={[{id:401,partname:'前把'},{id:402,partname:'链条'}
+          ,{id:401,partname:'前把'},{id:401,partname:'前把'},{id:401,partname:'前把'},
+            {id:401,partname:'前把'},{id:401,partname:'前把'},{id:401,partname:'前把'},]}
         />
       </View>
     );

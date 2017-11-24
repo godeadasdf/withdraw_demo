@@ -34,8 +34,8 @@ export default class CheckText extends Component {
         style={[styles.container,
           {backgroundColor: this.colorsBackground[colorIndex]}]}
         onPress={
-          () => {
-            this.setState((prevState) => {
+          async() => {
+            await this.setState((prevState) => {
               return {isChecked: !prevState.isChecked};
             });
             this.props.onPress(this.props.id, this.state.isChecked);
