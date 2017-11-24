@@ -120,12 +120,15 @@ export default class App extends Component<{}> {
   };
   
   generatePartSet = () => {
+    this.selectIds.sort((a,b)=>{return a-b});
+    this.selectNames = [];
     for (let i = 0, j = 0; i < this.data.length; i++) {
       if (this.selectIds[ j ] == this.data[ i ].id) {
         this.selectNames.push(this.data[ i ].name);
         j++;
       }
     }
+    
   };
 }
 
