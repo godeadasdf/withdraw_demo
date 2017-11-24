@@ -60,8 +60,8 @@ export default class App extends Component<{}> {
         />*/}
         <PartSelection
           partname={[{id:401,partname:'前把'},{id:402,partname:'链条'}
-          ,{id:401,partname:'前把'},{id:401,partname:'前把'},{id:401,partname:'前把'},
-            {id:401,partname:'前把'},{id:401,partname:'前把'},{id:401,partname:'前把'},]}
+          ,{id:403,partname:'前把'},{id:403,partname:'前把'},{id:404,partname:'前把'},
+            {id:405,partname:'前把'},{id:406,partname:'前把'},{id:407,partname:'前把'},]}
         />
       </View>
     );
