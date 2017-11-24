@@ -30,6 +30,7 @@ const instructions = Platform.select({
 export default class App extends Component<{}> {
   
   selectIds = [];
+  selectNames = [];
   
   data = [
     {
@@ -62,7 +63,7 @@ export default class App extends Component<{}> {
     }
   ];
   
-  constructor(props){
+  constructor(props) {
     super(props);
     this.onItemPress.bind(this);
   }
@@ -79,17 +80,17 @@ export default class App extends Component<{}> {
   
   renderPartSelect = () => {
     this.handlePartData();
-    const parts =  this.handledPartData.map((item) => {
-          return (
-            <PartSelection
-              name={item}
-              onItemPress={this.onItemPress}
-            />
-          );
-        });
+    const parts = this.handledPartData.map((item) => {
+      return (
+        <PartSelection
+          name={item}
+          onItemPress={this.onItemPress}
+        />
+      );
+    });
     return (
       <View>{parts}</View>
-    )
+    );
   };
   
   render() {
@@ -113,7 +114,18 @@ export default class App extends Component<{}> {
     } else {
       this.selectIds.splice(this.selectIds.indexOf(id), 1);
     }
+    this.generatePartSet();//正常情况在调用提交时调用该方法
     console.log(this.selectIds);
+    console.log(this.selectNames);
+  };
+  
+  generatePartSet = () => {
+    for (let i = 0, j = 0; i < this.data.length; i++) {
+      if (this.selectIds[ j ] == this.data[ i ].id) {
+        this.selectNames.push(this.data[ i ].name);
+        j++;
+      }
+    }
   };
 }
 
