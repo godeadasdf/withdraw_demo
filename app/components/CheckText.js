@@ -45,7 +45,7 @@ export default class CheckText extends Component {
       >
         <View>
           <Text style={styles.text}>
-            {this.props.partname}
+            {this.props.name}
           </Text>
         </View>
       </TouchableHighlight>

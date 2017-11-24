@@ -28,45 +28,93 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+  
+  selectIds = [];
+  
+  data = [
+    {
+      'id': 101,
+      'name': '闸把'
+    },
+    {
+      'id': 102,
+      'name': '把套'
+    },
+    {
+      'id': 201,
+      'name': '快拆'
+    },
+    {
+      'id': 202,
+      'name': '踏板'
+    },
+    {
+      'id': 301,
+      'name': '车锁'
+    },
+    {
+      'id': 302,
+      'name': '飞轮'
+    },
+    {
+      'id': 401,
+      'name': '未更换配件'
+    }
+  ];
+  
+  constructor(props){
+    super(props);
+    this.onItemPress.bind(this);
+  }
+  
+  handledPartData = [ [], [], [], [] ];
+  
+  handlePartData = () => {
+    this.handledPartData = [ [], [], [], [] ];
+    this.data.forEach((item) => {
+      const index = parseInt(item.id / 100) - 1;
+      this.handledPartData[ index ].push(item);
+    });
+  };
+  
+  renderPartSelect = () => {
+    this.handlePartData();
+    const parts =  this.handledPartData.map((item) => {
+          return (
+            <PartSelection
+              name={item}
+              onItemPress={this.onItemPress}
+            />
+          );
+        });
+    return (
+      <View>{parts}</View>
+    )
+  };
+  
   render() {
     return (
       <View style={styles.container}>
-        {/*<PersonalInfo/>
-        <ScrollViewStudy/>*/}
-        {/* <SingleAxisChart
-          data={{
-            number: [
-              {id: 1, num: 560, percent: 0.77},
-              {id: 2, num: 900, percent: 0.80},
-              {id: 3, num: 823, percent: 0.90},
-              {id: 4, num: 1010, percent: 0.59}
-            ], titles: [
-              '北京海淀黄庄地铁站A口',
-              '北京中关村地铁站A口',
-              '北京知春路地铁站B口',
-              '北京中关村购物中心'
-            ],
-            topTitles:[
-              '问题车',
-              '问题车入库率'
-            ]
-          }}
-          dualLine={true}
-
-        />*/}
-{/*        <CheckText
-          id={101}
-          partname='前把'
-        />*/}
-        <PartSelection
-          partname={[{id:401,partname:'前把'},{id:402,partname:'链条'}
-          ,{id:403,partname:'前把'},{id:403,partname:'前把'},{id:404,partname:'前把'},
-            {id:405,partname:'前把'},{id:406,partname:'前把'},{id:407,partname:'前把'},]}
-        />
+        {/*<PartSelection
+          partname={[ {id: 401, partname: '前把'}, {id: 402, partname: '链条'}
+            , {id: 403, partname: '前把'}, {id: 403, partname: '前把'}, {id: 404, partname: '前把'},
+            {id: 405, partname: '前把'}, {id: 406, partname: '前把'}, {id: 407, partname: '前把'}, ]}
+          onPress={() => {
+            this.onItemPress();
+          }}*/}
+        {this.renderPartSelect()}
       </View>
     );
   }
   
+  onItemPress = (id, state) => {
+    if (state == true) {
+      this.selectIds.push(id);
+    } else {
+      this.selectIds.splice(this.selectIds.indexOf(id), 1);
+    }
+    console.log(this.selectIds);
+  };
 }
 
 
@@ -75,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    alignItems:'flex-start',
+    alignItems: 'stretch',
     backgroundColor: '#436',
   },
 });

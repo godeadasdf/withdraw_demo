@@ -18,7 +18,7 @@ export default class PartSelection extends Component {
   
   
   getPartTitle = (id) => {
-    const index = parseInt(id / 100);
+    const index = parseInt(id / 100)-1;
     if (index < 3) {
       return partTitles[ index ];
     } else {
@@ -35,9 +35,9 @@ export default class PartSelection extends Component {
           backgroundColor: '#FDE000',
         }}/>
         <Text style={styles.titleText}>
-          {this.getPartTitle(this.props.partname[ 0 ].id)
+          {this.getPartTitle(this.props.name[ 0 ].id)
           + '（' + this.state.selectCount + '/' +
-          this.props.partname.length + '）'}
+          this.props.name.length + '）'}
         </Text>
       </View>
     );
@@ -46,7 +46,7 @@ export default class PartSelection extends Component {
   renderCheckTexts = () => {
     return (
       <View style={styles.bottomContainer}>
-        {this.props.partname.map((item) => {
+        {this.props.name.map((item) => {
           return <View style={styles.checkTextContainer}><CheckText
             onPress={(id, state) => {
               console.log(id, state);
@@ -60,11 +60,11 @@ export default class PartSelection extends Component {
                 this.setState((prevState) => {
                   return {selectCount: prevState.selectCount - 1};
                 });
-                //todo 添加this.props.onPress(this.selectIds)
               }
+              this.props.onItemPress(id, state);
             }}
             id={item.id}
-            partname={item.partname}
+            name={item.name}
           /></View>;
         })
         }
