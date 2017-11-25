@@ -7,18 +7,21 @@ import {
 export default class RounderCornerTitle extends PureComponent {
   
   render() {
-    return(
-    <View style={{
-      alignSelf:'stretch',
-      height: 24,
-      borderRadius: 9,
-      backgroundColor: '#fff',
-      flexDirection:'column'
-    }}>
-      <View style={{height: 15,
-        marginTop: 9,
-        flex:1,
-        backgroundColor: '#fff'}}/>
-    </View>);
+    const color = this.props.color ? this.props.color : '#fff';
+    return (
+      <View style={{
+        alignSelf: 'stretch',
+        height: 24,
+        borderRadius: 9,
+        flexDirection: 'column',
+        backgroundColor: color
+      }}>
+        <View style={{
+          height: 15,
+          marginTop: 9,
+          flex: 1,
+          backgroundColor: color
+        }}/>
+      </View>);
   }
 }

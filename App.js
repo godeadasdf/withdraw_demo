@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import PartSelection from './app/components/PartSelection';
 import RounderCornerTitle from './app/components/RounderCornerTitle';
+import PartSelectionDetail from './app/components/PartSelectionDetail';
 
 //todo制作圆角小盖头
 export default class App extends Component<{}> {
@@ -112,7 +113,7 @@ export default class App extends Component<{}> {
             this.state.selectNum > 0 ?
               {backgroundColor: '#FDE000'}
               : {backgroundColor: '#C4C4C4'} ]}>
-          <Text>提交</Text>
+          <Text style={styles.buttonText}>提交</Text>
         </TouchableHighlight>
       </View>
     );
@@ -121,9 +122,10 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <RounderCornerTitle/>
+       {/* <RounderCornerTitle/>
         {this.renderPartSelect()}
-        {this.renderSubmitButton()}
+        {this.renderSubmitButton()}*/}
+        <PartSelectionDetail/>
       </View>
     );
   }
@@ -147,7 +149,7 @@ export default class App extends Component<{}> {
     this.selectNames = [];
     for (let i = 0, j = 0; i < this.data.length; i++) {
       if (this.selectIds[ j ] == this.data[ i ].id) {
-        this.selectNames.push(this.data[ i ].name);
+        this.selectNames.push('【'+this.data[ i ].name+'】');
         j++;
       }
     }
@@ -185,9 +187,8 @@ const styles = StyleSheet.create({
     borderRadius: 9
   },
   buttonText: {
-    height: 48,
     fontSize: 14,
     color: '#292929',
-    textAlign: 'center'
+    fontWeight:'bold'
   }
 });
