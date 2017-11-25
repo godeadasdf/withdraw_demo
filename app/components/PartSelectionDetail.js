@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
   View,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   StyleSheet,
   Image,
   Text
@@ -13,8 +14,12 @@ export default class PartSelectionDetail extends PureComponent {
   renderTitle = () => {
     return (
       <View style={styles.titleContainer}>
-        <Image source={require('../images/close.png')}
-               style={styles.closeImage}/>
+        <TouchableWithoutFeedback style={{width:40,height:40}}
+        onPress={this.props.onClose}>
+          <Image source={require('../images/close.png')}
+                 style={styles.closeImage}
+          />
+        </TouchableWithoutFeedback>
         <Text style={styles.titleText}>
           已选择配件
         </Text>
@@ -51,7 +56,7 @@ export default class PartSelectionDetail extends PureComponent {
         {this.renderTitle()}
         <View style={styles.divideLine}/>
         <View style={{backgroundColor: '#fff', paddingBottom: 16}}>
-          {this.renderContents([ '【闸把】', '【闸把】', '【闸把】','【闸把】', '【闸把】', '【闸把】' ])}
+          {this.renderContents(this.props.name)}
           {this.renderSubmitButton()}
         </View>
       </View>
@@ -81,11 +86,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginRight:20
   },
   divideLine: {
     height: 1,
-    backgroundColor: '#E6E6E6'
+    backgroundColor: '#E6e6e6'
   },
   contentContainer: {
     backgroundColor: '#fff',
@@ -99,7 +105,8 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     marginRight: 8,
     color: '#666666',
-    fontSize: 16
+    fontSize: 16,
+    marginBottom:18
   },
   submitButton: {
     height: 48,

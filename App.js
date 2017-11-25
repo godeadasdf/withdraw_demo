@@ -23,7 +23,8 @@ export default class App extends Component<{}> {
   selectNames = [];
   
   state = {
-    selectNum: 0
+    selectNum: 0,
+    showSelectionDetail: false,
   };
   data = [
     {
@@ -112,23 +113,51 @@ export default class App extends Component<{}> {
           style={[ styles.submitButton,
             this.state.selectNum > 0 ?
               {backgroundColor: '#FDE000'}
-              : {backgroundColor: '#C4C4C4'} ]}>
+              : {backgroundColor: '#C4C4C4'} ]}
+          onPress={() => {
+            if (this.selectIds.length > 0) {
+              this.setState({showSelectionDetail: true});
+            }
+          }}>
           <Text style={styles.buttonText}>提交</Text>
         </TouchableHighlight>
       </View>
     );
   };
   
+  renderSelectionDetail = () => {
+    return (<View style={styles.cover}>
+      <View style={{flex: 1}}/>
+      <PartSelectionDetail
+        onClose={this.onClose}
+        name={this.selectNames}/>
+    </View>);
+  };
+  
   render() {
     return (
       <View style={styles.container}>
-       {/* <RounderCornerTitle/>
+        <RounderCornerTitle/>
         {this.renderPartSelect()}
-        {this.renderSubmitButton()}*/}
-        <PartSelectionDetail/>
+        {this.renderSubmitButton()}
+        {this.state.showSelectionDetail ? this.renderSelectionDetail() : null}
       </View>
     );
   }
+  
+  generatePartSet = () => {
+    this.selectIds.sort((a, b) => {
+      return a - b;
+    });
+    this.selectNames = [];
+    for (let i = 0, j = 0; i < this.data.length; i++) {
+      if (this.selectIds[ j ] == this.data[ i ].id) {
+        this.selectNames.push('【' + this.data[ i ].name + '】');
+        j++;
+      }
+    }
+    
+  };
   
   onItemPress = (id, state) => {
     if (state == true) {
@@ -142,19 +171,9 @@ export default class App extends Component<{}> {
     this.setState({selectNum: this.selectIds.length});
   };
   
-  generatePartSet = () => {
-    this.selectIds.sort((a, b) => {
-      return a - b;
-    });
-    this.selectNames = [];
-    for (let i = 0, j = 0; i < this.data.length; i++) {
-      if (this.selectIds[ j ] == this.data[ i ].id) {
-        this.selectNames.push('【'+this.data[ i ].name+'】');
-        j++;
-      }
-    }
-    
-  };
+  onClose = () => {
+    this.setState({showSelectionDetail:false});
+  }
 }
 
 
@@ -189,6 +208,15 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 14,
     color: '#292929',
-    fontWeight:'bold'
+    fontWeight: 'bold'
+  },
+  cover: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,.8)',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 999999999
   }
 });
