@@ -60,12 +60,12 @@ export default class App extends Component<{}> {
   };
   
   
-  //获取配件信息
+  //获取配件信息 GET
   fetchPartNames = (token) => (onSuccess, onFailure) => {
     
   };
   
-  //提交上报问题
+  //提交上报问题 POST
   submitPartIds = (token, bicycleNo, partArray, user_id) => (onSuccess, onFailure) => {
     
   };
