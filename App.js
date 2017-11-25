@@ -100,14 +100,11 @@ export default class App extends Component<{}> {
         <View style={{
           backgroundColor: '#fff',
           borderRadius: 9,
-          paddingTop: 24
+          paddingTop: 24,
+          flex:1
         }}>
           {parts}
         </View>
-        <View style={{
-          backgroundColor: '#fff',
-          flex:1
-        }}/>
       </ScrollView>
     );
   };
