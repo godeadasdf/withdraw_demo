@@ -93,6 +93,7 @@ export default class App extends Component<{}> {
     return (
       <ScrollView style={{
         flex: 1,
+        backgroundColor:'#fff',
       }}>
         <View style={{backgroundColor:'#fff',
           borderRadius: 9,
