@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Text,
   View,
@@ -8,7 +8,7 @@ import {
 import CheckText from './CheckText';
 
 const partTitles = [ '前段', '中段', '后段', '其他' ];
-export default class PartSelection extends Component {
+export default class PartSelection extends PureComponent {
   
   state = {
     selectCount: 0, //选中的个数

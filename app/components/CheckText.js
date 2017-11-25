@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 
-export default class CheckText extends Component {
+export default class CheckText extends PureComponent {
   
   colorsBackground = [
     '#FDE000',//选中
