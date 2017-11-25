@@ -58,36 +58,56 @@ export default class App extends Component<{}> {
     bilateral: [ 101, 102, 202 ]
   };
   
+  handleItems = [];
+  
+  
   //获取配件信息
   fetchPartNames = (token) => (onSuccess, onFailure) => {
-  
+    
   };
   
   //提交上报问题
   submitPartIds = (token, bicycleNo, partArray, user_id) => (onSuccess, onFailure) => {
-  
+    
   };
   
   //展示异常情况
   renderAlertDialog = (message) => {
-  
+    
   };
+  
+  //将原始数据的id加上左右的处理
+  //处理id 优先乘以10， 选择 +1 或者 +2 最后/10 %10 组成数组的两部分作为参数
+  generateItems = () => {
+    this.state.data.forEach((item) => {
+      if (this.state.bilateral.indexOf(item.id) != -1) {
+        this.handleItems.push({id: item.id * 10 + 1, name: item.name + '-左'});
+        this.handleItems.push({id: item.id * 10 + 2, name: item.name + '-右'});
+      } else {
+        this.handleItems.push({id: item.id * 10, name: item.name});
+      }
+    });
+    console.log(this.handleItems);
+  };
+  
+  //todo 防止同一id返回两遍 用set处理
   
   constructor(props) {
     super(props);
     this.onItemPress.bind(this);
+    
   }
   
   componentWillMount() {
-  
+    this.generateItems();
   }
   
   handledPartData = [ [], [], [], [] ];
   
   handlePartData = () => {
     this.handledPartData = [ [], [], [], [] ];
-    this.state.data.forEach((item) => {
-      const index = parseInt(item.id / 100) - 1;
+    this.handleItems.forEach((item) => {
+      const index = parseInt(item.id / 1000) - 1;  //要编程除1000
       this.handledPartData[ index ].push(item);
     });
   };
@@ -103,6 +123,7 @@ export default class App extends Component<{}> {
           <PartSelection
             name={item}
             onItemPress={this.onItemPress}
+            bilateral={this.state.bilateral} //输入数组是分左右的数组
           />
           {index == this.handledPartData.length - 1 ?
             null :
@@ -137,9 +158,10 @@ export default class App extends Component<{}> {
           underlayColor={this.state.selectNum > 0 ? '#ecd100' : '#e1e1e1'}
           onPress={() => {
             if (this.selectIds.length > 0) {
+              this.generatePartSet();//正常情况在调用提交时调用该方法
               this.setState({showSelectionDetail: true});
             } else {
-            
+              this.renderAlertDialog('请先选择车牌配件');
             }
           }}>
           <Text style={styles.buttonText}>提交</Text>
@@ -173,13 +195,12 @@ export default class App extends Component<{}> {
       return a - b;
     });
     this.selectNames = [];
-    for (let i = 0, j = 0; i < this.state.data.length; i++) {
-      if (this.selectIds[ j ] == this.state.data[ i ].id) {
-        this.selectNames.push('【' + this.state.data[ i ].name + '】');
+    for (let i = 0, j = 0; i < this.handleItems.length; i++) {
+      if (this.selectIds[ j ] == this.handleItems[ i ].id) {
+        this.selectNames.push('【' + this.handleItems[ i ].name + '】');
         j++;
       }
     }
-    
   };
   
   onItemPress = (id, state) => {
@@ -188,7 +209,6 @@ export default class App extends Component<{}> {
     } else {
       this.selectIds.splice(this.selectIds.indexOf(id), 1);
     }
-    this.generatePartSet();//正常情况在调用提交时调用该方法
     console.log(this.selectIds);
     console.log(this.selectNames);
     this.setState({selectNum: this.selectIds.length});

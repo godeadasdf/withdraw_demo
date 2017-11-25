@@ -18,7 +18,7 @@ export default class PartSelection extends Component {
   
   
   getPartTitle = (id) => {
-    const index = parseInt(id / 100)-1;
+    const index = parseInt(id / 1000)-1;
     if (index < 3) {
       return partTitles[ index ];
     } else {

@@ -21,7 +21,7 @@ export default class PartSelectionDetail extends PureComponent {
           />
         </TouchableWithoutFeedback>
         <Text style={styles.titleText}>
-          已选择配件
+          确认提交以下配件
         </Text>
       </View>
     );
