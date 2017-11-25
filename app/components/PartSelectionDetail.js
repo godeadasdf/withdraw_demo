@@ -27,11 +27,31 @@ export default class PartSelectionDetail extends PureComponent {
     );
   };
   
-  renderContents = (name) => {
-    const names = name.map((item) => {
+  //todo 做严格的正则表达式
+  renderItem = (smallText, item) => {
+    if (smallText == -1) {
       return (<Text style={styles.textItem}>
         {item}
       </Text>);
+    } else {
+      return (
+        <View style={{flexDirection: 'row'}}>
+          <Text style={[styles.textItem,{marginRight:0}]}>
+            {item.slice(0, smallText)}
+          </Text>
+          <Text style={styles.textItemSmall}>
+            {item.slice(smallText, item.length - 1)}
+          </Text>
+          <Text style={[styles.textItem,{marginLeft:0}]}>
+            {item.slice(item.length - 1, item.length)}
+          </Text>
+        </View>);
+    }
+  };
+  
+  renderContents = (name) => {
+    const names = name.map((item) => {
+      return this.renderItem(item.indexOf('-'), item);
     });
     return <View style={styles.contentContainer}>
       {names}
@@ -65,7 +85,8 @@ export default class PartSelectionDetail extends PureComponent {
         </View>
       </View>
     );
-  };
+  }
+  ;
   
 }
 
@@ -113,6 +134,12 @@ const styles = StyleSheet.create({
     color: '#666666',
     fontSize: 16,
     marginBottom: 18
+  },
+  textItemSmall: {
+    color: '#666666',
+    fontSize: 12,
+    marginBottom: 18,
+    marginTop:4
   },
   submitButton: {
     height: 48,
