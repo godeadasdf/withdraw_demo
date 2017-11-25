@@ -92,7 +92,7 @@ export default class PartSelectionDetail extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#E6e6e6',
+    //backgroundColor: 'rgba(0,0,0,.7)',
     flexDirection: 'column',
     alignSelf: 'stretch',
   },
