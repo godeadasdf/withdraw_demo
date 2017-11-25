@@ -14,8 +14,8 @@ export default class PartSelectionDetail extends PureComponent {
   renderTitle = () => {
     return (
       <View style={styles.titleContainer}>
-        <TouchableWithoutFeedback style={{width:40,height:40}}
-        onPress={this.props.onClose}>
+        <TouchableWithoutFeedback style={{width: 40, height: 40}}
+                                  onPress={this.props.onClose}>
           <Image source={require('../images/close.png')}
                  style={styles.closeImage}
           />
@@ -42,7 +42,8 @@ export default class PartSelectionDetail extends PureComponent {
     return (
       <View style={styles.buttonContainer}>
         <TouchableHighlight
-          style={styles.submitButton}>
+          style={styles.submitButton}
+          underlayColor='#ecd100'>
           <Text style={styles.buttonText}>提交</Text>
         </TouchableHighlight>
       </View>
@@ -67,7 +68,7 @@ export default class PartSelectionDetail extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'#E6e6e6',
+    backgroundColor: '#E6e6e6',
     flexDirection: 'column',
     alignSelf: 'stretch',
   },
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     width: 14.3,
     height: 14.3,
-    marginTop:4
+    marginTop: 4
   },
   titleText: {
     flex: 1,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     color: '#333333',
     fontSize: 20,
     fontWeight: 'bold',
-    marginRight:20
+    marginRight: 20
   },
   divideLine: {
     height: 1,
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
     color: '#666666',
     fontSize: 16,
-    marginBottom:18
+    marginBottom: 18
   },
   submitButton: {
     height: 48,

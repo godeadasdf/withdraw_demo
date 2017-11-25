@@ -25,48 +25,68 @@ export default class App extends Component<{}> {
   state = {
     selectNum: 0,
     showSelectionDetail: false,
+    data: [
+      {
+        'id': 101,
+        'name': '闸把'
+      },
+      {
+        'id': 102,
+        'name': '把套'
+      },
+      {
+        'id': 201,
+        'name': '快拆'
+      },
+      {
+        'id': 202,
+        'name': '踏板'
+      },
+      {
+        'id': 301,
+        'name': '车锁'
+      },
+      {
+        'id': 302,
+        'name': '飞轮'
+      },
+      {
+        'id': 401,
+        'name': '未更换配件'
+      }
+    ],
+    bilateral: [ 101, 102, 202 ]
   };
-  data = [
-    {
-      'id': 101,
-      'name': '闸把'
-    },
-    {
-      'id': 102,
-      'name': '把套'
-    },
-    {
-      'id': 201,
-      'name': '快拆'
-    },
-    {
-      'id': 202,
-      'name': '踏板'
-    },
-    {
-      'id': 301,
-      'name': '车锁'
-    },
-    {
-      'id': 302,
-      'name': '飞轮'
-    },
-    {
-      'id': 401,
-      'name': '未更换配件'
-    }
-  ];
+  
+  //获取配件信息
+  fetchPartNames = (token) => (onSuccess, onFailure) => {
+  
+  };
+  
+  //提交上报问题
+  submitPartIds = (token, bicycleNo, partArray, user_id) => (onSuccess, onFailure) => {
+  
+  };
+  
+  //展示异常情况
+  renderAlertDialog = (message) => {
+  
+  };
   
   constructor(props) {
     super(props);
     this.onItemPress.bind(this);
   }
   
+  componentWillMount() {
+  
+  }
+  
   handledPartData = [ [], [], [], [] ];
   
   handlePartData = () => {
     this.handledPartData = [ [], [], [], [] ];
-    this.data.forEach((item) => {
+    this.state.data.forEach((item) => {
       const index = parseInt(item.id / 100) - 1;
       this.handledPartData[ index ].push(item);
     });
@@ -114,9 +134,12 @@ export default class App extends Component<{}> {
             this.state.selectNum > 0 ?
               {backgroundColor: '#FDE000'}
               : {backgroundColor: '#C4C4C4'} ]}
+          underlayColor={this.state.selectNum > 0 ? '#ecd100' : '#e1e1e1'}
           onPress={() => {
             if (this.selectIds.length > 0) {
               this.setState({showSelectionDetail: true});
+            } else {
+            
             }
           }}>
           <Text style={styles.buttonText}>提交</Text>
@@ -150,9 +173,9 @@ export default class App extends Component<{}> {
       return a - b;
     });
     this.selectNames = [];
-    for (let i = 0, j = 0; i < this.data.length; i++) {
-      if (this.selectIds[ j ] == this.data[ i ].id) {
-        this.selectNames.push('【' + this.data[ i ].name + '】');
+    for (let i = 0, j = 0; i < this.state.data.length; i++) {
+      if (this.selectIds[ j ] == this.state.data[ i ].id) {
+        this.selectNames.push('【' + this.state.data[ i ].name + '】');
         j++;
       }
     }
@@ -172,8 +195,8 @@ export default class App extends Component<{}> {
   };
   
   onClose = () => {
-    this.setState({showSelectionDetail:false});
-  }
+    this.setState({showSelectionDetail: false});
+  };
 }
 
 
