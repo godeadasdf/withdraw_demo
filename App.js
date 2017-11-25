@@ -9,6 +9,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  ScrollView,
   View
 } from 'react-native';
 import WithdrawCard from './app/components/withdrawcard';
@@ -80,29 +81,34 @@ export default class App extends Component<{}> {
   
   renderPartSelect = () => {
     this.handlePartData();
-    const parts = this.handledPartData.map((item) => {
+    const parts = this.handledPartData.map((item, index) => {
       return (
-        <PartSelection
-          name={item}
-          onItemPress={this.onItemPress}
-        />
+        <View style={{flexDirection: 'column'}}>
+          <PartSelection
+            name={item}
+            onItemPress={this.onItemPress}
+          />
+          {index == this.handledPartData.length - 1 ?
+            null :
+            <View style={styles.divideLine}/>}
+        
+        </View>
       );
     });
     return (
-      <View>{parts}</View>
+      <ScrollView style={{
+        flex: 1,
+        borderRadius: 9,
+        paddingTop: 24
+      }}>
+        {parts}
+      </ScrollView>
     );
   };
   
   render() {
     return (
       <View style={styles.container}>
-        {/*<PartSelection
-          partname={[ {id: 401, partname: '前把'}, {id: 402, partname: '链条'}
-            , {id: 403, partname: '前把'}, {id: 403, partname: '前把'}, {id: 404, partname: '前把'},
-            {id: 405, partname: '前把'}, {id: 406, partname: '前把'}, {id: 407, partname: '前把'}, ]}
-          onPress={() => {
-            this.onItemPress();
-          }}*/}
         {this.renderPartSelect()}
       </View>
     );
@@ -120,7 +126,9 @@ export default class App extends Component<{}> {
   };
   
   generatePartSet = () => {
-    this.selectIds.sort((a,b)=>{return a-b});
+    this.selectIds.sort((a, b) => {
+      return a - b;
+    });
     this.selectNames = [];
     for (let i = 0, j = 0; i < this.data.length; i++) {
       if (this.selectIds[ j ] == this.data[ i ].id) {
@@ -139,6 +147,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#436',
+    backgroundColor: '#fff'
   },
+  divideLine: {
+    marginTop: 24,
+    marginBottom: 24,
+    height: 1,
+    backgroundColor: '#E6E6E6'
+  }
 });
