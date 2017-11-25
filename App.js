@@ -78,7 +78,10 @@ export default class App extends Component<{}> {
     this.handlePartData();
     const parts = this.handledPartData.map((item, index) => {
       return (
-        <View style={{flexDirection: 'column'}}>
+        <View style={{
+          flexDirection: 'column',
+          backgroundColor: '#fff',
+        }}>
           <PartSelection
             name={item}
             onItemPress={this.onItemPress}
@@ -93,13 +96,18 @@ export default class App extends Component<{}> {
     return (
       <ScrollView style={{
         flex: 1,
-        backgroundColor:'#fff',
       }}>
-        <View style={{backgroundColor:'#fff',
+        <View style={{
+          backgroundColor: '#fff',
           borderRadius: 9,
-          paddingTop: 24}}>
-        {parts}
+          paddingTop: 24
+        }}>
+          {parts}
         </View>
+        <View style={{
+          backgroundColor: '#fff',
+          flex:1
+        }}/>
       </ScrollView>
     );
   };
@@ -160,7 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#40434e'
   },
   divideLine: {
-    marginTop: 24,
+    marginTop: 8,
     marginBottom: 24,
     height: 1,
     backgroundColor: '#E6E6E6'
@@ -178,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:9
+    borderRadius: 9
   },
   buttonText: {
     height: 48,

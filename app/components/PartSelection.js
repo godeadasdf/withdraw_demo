@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   
   //todo 可能使用一个表示均分的UI形式 找UI对 属性叫。。。。xxbetween
   bottomContainer: {
+    backgroundColor:'#fff',
     paddingLeft: 4,
     paddingRight: 4,
     flexDirection: 'row',
@@ -108,10 +109,9 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start'
   },
   checkTextContainer: {
-    backgroundColor:'#fff',
     marginRight: 12,
     marginLeft: 12,
-    paddingBottom: 24
+    paddingBottom: 16
   }
 });
 
