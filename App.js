@@ -10,14 +10,9 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
-import WithdrawCard from './app/components/withdrawcard';
-import PersonalInfo from './app/components/personalinfo';
-import TableBarWithAnim from './app/components/TableBarWithAnim';
-import ScrollViewStudy from './app/components/ScrollViewStudy';
-import SingleAxisChart from './app/components/SingAxisChart';
-import CheckText from './app/components/CheckText';
 import PartSelection from './app/components/PartSelection';
 
 
@@ -98,11 +93,24 @@ export default class App extends Component<{}> {
     return (
       <ScrollView style={{
         flex: 1,
-        borderRadius: 9,
-        paddingTop: 24
       }}>
+        <View style={{backgroundColor:'#fff',
+          borderRadius: 9,
+          paddingTop: 24}}>
         {parts}
+        </View>
       </ScrollView>
+    );
+  };
+  
+  renderSubmitButton = () => {
+    return (
+      <View style={styles.buttonContainer}>
+        <TouchableHighlight
+          style={styles.submitButton}>
+          <Text>提交</Text>
+        </TouchableHighlight>
+      </View>
     );
   };
   
@@ -110,6 +118,7 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         {this.renderPartSelect()}
+        {this.renderSubmitButton()}
       </View>
     );
   }
@@ -147,12 +156,33 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#fff'
+    backgroundColor: '#40434e'
   },
   divideLine: {
     marginTop: 24,
     marginBottom: 24,
     height: 1,
     backgroundColor: '#E6E6E6'
+  },
+  buttonContainer: {
+    backgroundColor: '#fff',
+    paddingBottom: 16,
+    paddingTop: 16
+  },
+  submitButton: {
+    height: 48,
+    marginLeft: 16,
+    marginRight: 16,
+    backgroundColor: '#FDE000',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:9
+  },
+  buttonText: {
+    height: 48,
+    fontSize: 14,
+    color: '#292929',
+    textAlign: 'center'
   }
 });

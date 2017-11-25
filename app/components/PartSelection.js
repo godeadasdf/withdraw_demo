@@ -108,9 +108,10 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start'
   },
   checkTextContainer: {
+    backgroundColor:'#fff',
     marginRight: 12,
     marginLeft: 12,
-    marginBottom: 24
+    paddingBottom: 24
   }
 });
 
