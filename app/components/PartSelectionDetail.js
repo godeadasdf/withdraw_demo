@@ -43,6 +43,9 @@ export default class PartSelectionDetail extends PureComponent {
       <View style={styles.buttonContainer}>
         <TouchableHighlight
           style={styles.submitButton}
+          onPress={() => {
+            this.props.onSubmit();
+          }}
           underlayColor='#ecd100'>
           <Text style={styles.buttonText}>提交</Text>
         </TouchableHighlight>

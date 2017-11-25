@@ -16,11 +16,12 @@ import PartSelection from './app/components/PartSelection';
 import RounderCornerTitle from './app/components/RounderCornerTitle';
 import PartSelectionDetail from './app/components/PartSelectionDetail';
 
-//todo制作圆角小盖头
 export default class App extends Component<{}> {
   
-  selectIds = [];
-  selectNames = [];
+  selectIds = []; //选中的数组
+  selectNames = []; //选中的部件名称
+  handleItems = []; //针对左右问题处理后生成的数据
+  submitParams = []; //上传parts二维数组字段
   
   state = {
     selectNum: 0,
@@ -55,10 +56,8 @@ export default class App extends Component<{}> {
         'name': '未更换配件'
       }
     ],
-    bilateral: [ 101, 102, 202 ]
+    bilateral: [ 101, 102, 202 ]  //分左右的部件id
   };
-  
-  handleItems = [];
   
   
   //获取配件信息
@@ -78,7 +77,7 @@ export default class App extends Component<{}> {
   
   //将原始数据的id加上左右的处理
   //处理id 优先乘以10， 选择 +1 或者 +2 最后/10 %10 组成数组的两部分作为参数
-  generateItems = () => {
+  generateItemData = () => {
     this.state.data.forEach((item) => {
       if (this.state.bilateral.indexOf(item.id) != -1) {
         this.handleItems.push({id: item.id * 10 + 1, name: item.name + '-左'});
@@ -99,7 +98,7 @@ export default class App extends Component<{}> {
   }
   
   componentWillMount() {
-    this.generateItems();
+    this.generateItemData();
   }
   
   handledPartData = [ [], [], [], [] ];
@@ -175,6 +174,7 @@ export default class App extends Component<{}> {
       <View style={{flex: 1}}/>
       <PartSelectionDetail
         onClose={this.onClose}
+        onSubmit={this.onSubmit}
         name={this.selectNames}/>
     </View>);
   };
@@ -212,6 +212,21 @@ export default class App extends Component<{}> {
     console.log(this.selectIds);
     console.log(this.selectNames);
     this.setState({selectNum: this.selectIds.length});
+  };
+  
+  generateSubmitParams = () => {
+    this.submitParams = [];
+    this.selectIds.forEach((item) => {
+      const paramItem = [];
+      paramItem.push(parseInt(item / 10), item % 10);
+      this.submitParams.push(paramItem);
+    });
+  };
+  
+  onSubmit = () => {
+    this.generateSubmitParams();
+    console.log(this.submitParams);
+    //todo 连接submit网络请求函数
   };
   
   onClose = () => {
