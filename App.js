@@ -98,6 +98,7 @@ export default class App extends Component<{}> {
   }
   
   componentWillMount() {
+    //todo 取得fetchPartNames
     this.generateItemData();
   }
   
@@ -226,7 +227,11 @@ export default class App extends Component<{}> {
   onSubmit = () => {
     this.generateSubmitParams();
     console.log(this.submitParams);
-    //todo 连接submit网络请求函数
+    //todo 连接submit网络请求函数submitPartIds
+  };
+  
+  onSuccess = () => {
+    //todo showToast
   };
   
   onClose = () => {
