@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   ScrollView,
@@ -14,20 +13,17 @@ import {
   TouchableHighlight
 } from 'react-native';
 import PartSelection from './app/components/PartSelection';
+import RounderCornerTitle from './app/components/RounderCornerTitle';
 
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-  'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-  'Shake or press menu button for dev menu',
-});
-
+//todo制作圆角小盖头
 export default class App extends Component<{}> {
   
   selectIds = [];
   selectNames = [];
   
+  state = {
+    selectNum: 0
+  };
   data = [
     {
       'id': 101,
@@ -96,12 +92,11 @@ export default class App extends Component<{}> {
     return (
       <ScrollView style={{
         flex: 1,
+        backgroundColor: '#fff',
       }}>
         <View style={{
           backgroundColor: '#fff',
-          borderRadius: 9,
-          paddingTop: 24,
-          flex:1
+          flex: 1
         }}>
           {parts}
         </View>
@@ -113,7 +108,10 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.buttonContainer}>
         <TouchableHighlight
-          style={styles.submitButton}>
+          style={[ styles.submitButton,
+            this.state.selectNum > 0 ?
+              {backgroundColor: '#FDE000'}
+              : {backgroundColor: '#C4C4C4'} ]}>
           <Text>提交</Text>
         </TouchableHighlight>
       </View>
@@ -123,6 +121,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
+        <RounderCornerTitle/>
         {this.renderPartSelect()}
         {this.renderSubmitButton()}
       </View>
@@ -138,6 +137,7 @@ export default class App extends Component<{}> {
     this.generatePartSet();//正常情况在调用提交时调用该方法
     console.log(this.selectIds);
     console.log(this.selectNames);
+    this.setState({selectNum: this.selectIds.length});
   };
   
   generatePartSet = () => {
@@ -179,7 +179,6 @@ const styles = StyleSheet.create({
     height: 48,
     marginLeft: 16,
     marginRight: 16,
-    backgroundColor: '#FDE000',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
