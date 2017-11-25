@@ -67,6 +67,7 @@ export default class PartSelectionDetail extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#E6e6e6',
     flexDirection: 'column',
     alignSelf: 'stretch',
   },
@@ -74,12 +75,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     backgroundColor: '#fff',
-    height: 36,
+    height: 42,
   },
   closeImage: {
     marginLeft: 16,
     width: 14.3,
-    height: 14.3
+    height: 14.3,
+    marginTop:4
   },
   titleText: {
     flex: 1,
