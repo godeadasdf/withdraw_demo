@@ -32,15 +32,10 @@ export default class App extends Component<{}> {
         {this.state.showAlert ?
           <AlertModalView
             cancelable={false}
-            type='error'
+            content={['b', 'b', 'b', 'b']}
             dismiss={this.onClose}
-            subtitle='副标题文案文案文案文案文案文案'
             positiveButton={{
-              title: '好的',
-              action: this.onClose
-            }}
-            negativeButton={{
-              title: '不好',
+              title: '知道了',
               action: this.onClose
             }}
           />

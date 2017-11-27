@@ -13,7 +13,6 @@ export type AlertType = 'success' | 'warnning' | 'error';
 
 export type Props = {
   cancelable: boolean,  //是否显示右上角close
-  type: AlertType,
   content: Array,
   positiveButton: {
     title: string,
@@ -89,6 +88,19 @@ export default class AlertModalPureText extends Component<Props> {
     }
   }
 
+  renderItems() {
+    return (<View style={styles.textItemContainer}>
+      {this.props.content && this.props.content.map((item, index) => {
+          return <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            <Text>{item}</Text>
+            <Text>ssssssssssssssssssssssssssssssssssss
+              sssssssssssss</Text>
+          </View>;
+        }
+      )}
+    </View>);
+  }
+
   render() {
     return (
       <Modal
@@ -98,6 +110,8 @@ export default class AlertModalPureText extends Component<Props> {
         <View style={styles.container}>
           <View style={styles.dialogContainer}>
             {this.renderClose()}
+            {this.renderItems()}
+            {this.renderButton()}
           </View>
         </View>
       </Modal>
@@ -126,6 +140,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 12,
     marginTop: 12,
+  },
+  textItemContainer: {
+    marginTop: 10,
+    marginBottom: 30,
+    marginLeft: 16,
+    marginRight: 16,
   },
   singleButtonContainer: {
     flexDirection: 'row',

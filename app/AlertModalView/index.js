@@ -26,7 +26,7 @@ export default class AlertModalViewMix extends React.Component {
   };
 
   render() {
-    return this.renderContent(this.props.style ? this.props.style : 'image');
+    return this.renderContent(this.props.style ? this.props.style : 'text');
   }
 
 

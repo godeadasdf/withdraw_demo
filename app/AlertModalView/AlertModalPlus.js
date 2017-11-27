@@ -3,6 +3,7 @@ import {
   Modal,
   Text,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   Image,
   View,
   StyleSheet
@@ -53,7 +54,7 @@ export default class AlertModalPlus extends Component<Props> {
   renderClose() {
     const cancelable = this.props.cancelable == undefined ? true : this.props.cancelable;
     return (
-      <TouchableHighlight
+      <TouchableWithoutFeedback
         onPress={this.props.dismiss}
       >
         <View style={styles.closeContainer}>
@@ -62,7 +63,7 @@ export default class AlertModalPlus extends Component<Props> {
                    source={require('./img/close.png')}/>
             : null}
         </View>
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     );
   }
 
