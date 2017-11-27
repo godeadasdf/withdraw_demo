@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Modal,
   Text,
@@ -9,7 +9,6 @@ import {
   StyleSheet
 } from 'react-native';
 
-export type AlertType = 'success' | 'warnning' | 'error';
 
 export type Props = {
   cancelable: boolean,  //是否显示右上角close
@@ -27,7 +26,7 @@ export type Props = {
 
 
 export default class AlertModalPureText extends Component<Props> {
-
+  
   renderClose() {
     const cancelable = this.props.cancelable == undefined ? true : this.props.cancelable;
     return (
@@ -43,7 +42,7 @@ export default class AlertModalPureText extends Component<Props> {
       </TouchableWithoutFeedback>
     );
   }
-
+  
   //不设置button时默认动作为dismiss
   renderButton() {
     if (this.props.negativeButton == undefined) {
@@ -65,8 +64,8 @@ export default class AlertModalPureText extends Component<Props> {
             underlayColor='#E1E1E1'
             style={{borderBottomLeftRadius: 9}}
             onPress={this.props.positiveButton.action ? this.props.positiveButton.action : this.props.dismiss}>
-            <View style={[styles.singleButtonContainer,
-              {width: 143.5, borderBottomRightRadius: 0, backgroundColor: '#F1F1F1'}]}>
+            <View style={[ styles.singleButtonContainer,
+              {width: 143.5, borderBottomRightRadius: 0, backgroundColor: '#F1F1F1'} ]}>
               <Text style={styles.singleButton}>
                 {this.props.positiveButton ? this.props.positiveButton.title : '取消'}
               </Text>
@@ -77,7 +76,7 @@ export default class AlertModalPureText extends Component<Props> {
             style={{borderBottomRightRadius: 9}}
             underlayColor='#ECD100'
             onPress={this.props.negativeButton.action ? this.props.negativeButton.action : this.props.dismiss}>
-            <View style={[styles.singleButtonContainer, {width: 143.5, borderBottomLeftRadius: 0}]}>
+            <View style={[ styles.singleButtonContainer, {width: 143.5, borderBottomLeftRadius: 0} ]}>
               <Text style={styles.singleButton}>
                 {this.props.negativeButton ? this.props.negativeButton.title : '确定'}
               </Text>
@@ -87,20 +86,23 @@ export default class AlertModalPureText extends Component<Props> {
       );
     }
   }
-
+  
+  
   renderItems() {
     return (<View style={styles.textItemContainer}>
       {this.props.content && this.props.content.map((item, index) => {
+          let pos = item.indexOf(':');
           return <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-            <Text>{item}</Text>
-            <Text>ssssssssssssssssssssssssssssssssssss
-              sssssssssssss</Text>
+            <Text>
+              {item.slice(0, pos)}
+              <Text>{item.slice(pos, item.length)}</Text>
+            </Text>
           </View>;
         }
       )}
     </View>);
   }
-
+  
   render() {
     return (
       <Modal
@@ -117,8 +119,8 @@ export default class AlertModalPureText extends Component<Props> {
       </Modal>
     );
   }
-
-
+  
+  
 }
 
 const styles = StyleSheet.create({
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   textItemContainer: {
+    width: 256,
     marginTop: 10,
     marginBottom: 30,
     marginLeft: 16,
