@@ -15,227 +15,41 @@ import {
 import PartSelection from './app/components/PartSelection';
 import RounderCornerTitle from './app/components/RounderCornerTitle';
 import PartSelectionDetail from './app/components/PartSelectionDetail';
+import AlertModalView from './app/AlertModalView';
+
+//单button
+
 
 export default class App extends Component<{}> {
-  
-  selectIds = []; //选中的数组
-  selectNames = []; //选中的部件名称
-  handleItems = []; //针对左右问题处理后生成的数据
-  submitParams = []; //上传parts二维数组字段
-  
+
   state = {
-    selectNum: 0,
-    showSelectionDetail: false,
-    data: [
-      {
-        'id': 101,
-        'name': '闸把'
-      },
-      {
-        'id': 102,
-        'name': '把套'
-      },
-      {
-        'id': 201,
-        'name': '快拆'
-      },
-      {
-        'id': 202,
-        'name': '踏板'
-      },
-      {
-        'id': 301,
-        'name': '车锁'
-      },
-      {
-        'id': 302,
-        'name': '飞轮'
-      },
-      {
-        'id': 401,
-        'name': '未更换配件'
-      }
-    ],
-    bilateral: [ 101, 102, 202 ]  //分左右的部件id
-  };
-  
-  
-  //获取配件信息 GET
-  fetchPartNames = (token) => (onSuccess, onFailure) => {
-    
-  };
-  
-  //提交上报问题 POST
-  submitPartIds = (token, bicycleNo, partArray, user_id) => (onSuccess, onFailure) => {
-    
-  };
-  
-  //展示异常情况
-  renderAlertDialog = (message) => {
-    
-  };
-  
-  //将原始数据的id加上左右的处理
-  //处理id 优先乘以10， 选择 +1 或者 +2 最后/10 %10 组成数组的两部分作为参数
-  generateItemData = () => {
-    this.state.data.forEach((item) => {
-      if (this.state.bilateral.indexOf(item.id) != -1) {
-        this.handleItems.push({id: item.id * 10 + 1, name: item.name + '-左'});
-        this.handleItems.push({id: item.id * 10 + 2, name: item.name + '-右'});
-      } else {
-        this.handleItems.push({id: item.id * 10, name: item.name});
-      }
-    });
-    console.log(this.handleItems);
-  };
-  
-  //todo 防止同一id返回两遍 用set处理
-  
-  constructor(props) {
-    super(props);
-    this.onItemPress.bind(this);
-    
+    showAlert: true
   }
-  
-  componentWillMount() {
-    //todo 取得fetchPartNames
-    this.generateItemData();
-  }
-  
-  handledPartData = [ [], [], [], [] ];
-  
-  handlePartData = () => {
-    this.handledPartData = [ [], [], [], [] ];
-    this.handleItems.forEach((item) => {
-      const index = parseInt(item.id / 1000) - 1;  //要编程除1000
-      this.handledPartData[ index ].push(item);
-    });
-  };
-  
-  renderPartSelect = () => {
-    this.handlePartData();
-    const parts = this.handledPartData.map((item, index) => {
-      return (
-        <View style={{
-          flexDirection: 'column',
-          backgroundColor: '#fff',
-        }}>
-          <PartSelection
-            name={item}
-            onItemPress={this.onItemPress}
-            bilateral={this.state.bilateral} //输入数组是分左右的数组
-          />
-          {index == this.handledPartData.length - 1 ?
-            null :
-            <View style={styles.divideLine}/>}
-        
-        </View>
-      );
-    });
-    return (
-      <ScrollView style={{
-        flex: 1,
-        backgroundColor: '#fff',
-      }}>
-        <View style={{
-          backgroundColor: '#fff',
-          flex: 1
-        }}>
-          {parts}
-        </View>
-      </ScrollView>
-    );
-  };
-  
-  renderSubmitButton = () => {
-    return (
-      <View style={styles.buttonContainer}>
-        <TouchableHighlight
-          style={[ styles.submitButton,
-            this.state.selectNum > 0 ?
-              {backgroundColor: '#FDE000'}
-              : {backgroundColor: '#C4C4C4'} ]}
-          underlayColor={this.state.selectNum > 0 ? '#ecd100' : '#e1e1e1'}
-          onPress={() => {
-            if (this.selectIds.length > 0) {
-              this.generatePartSet();//正常情况在调用提交时调用该方法
-              this.setState({showSelectionDetail: true});
-            } else {
-              this.renderAlertDialog('请先选择车牌配件');
-            }
-          }}>
-          <Text style={styles.buttonText}>提交</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  };
-  
-  renderSelectionDetail = () => {
-    return (<View style={styles.cover}>
-      <View style={{flex: 1}}/>
-      <PartSelectionDetail
-        onClose={this.onClose}
-        onSubmit={this.onSubmit}
-        name={this.selectNames}/>
-    </View>);
-  };
-  
+
   render() {
     return (
-      <View style={styles.container}>
-        <RounderCornerTitle/>
-        {this.renderPartSelect()}
-        {this.renderSubmitButton()}
-        {this.state.showSelectionDetail ? this.renderSelectionDetail() : null}
-      </View>
-    );
+      <View>
+        {this.state.showAlert ?
+          <AlertModalView
+            cancelable={false}
+            type='error'
+            dismiss={this.onClose}
+            subtitle='副标题文案文案文案文案文案文案'
+            positiveButton={{
+              title: '好的',
+              action: this.onClose
+            }}
+            negativeButton={{
+              title: '不好',
+              action: this.onClose
+            }}
+          />
+          : null}
+      </View>);
   }
-  
-  generatePartSet = () => {
-    this.selectIds.sort((a, b) => {
-      return a - b;
-    });
-    this.selectNames = [];
-    for (let i = 0, j = 0; i < this.handleItems.length; i++) {
-      if (this.selectIds[ j ] == this.handleItems[ i ].id) {
-        this.selectNames.push('【' + this.handleItems[ i ].name + '】');
-        j++;
-      }
-    }
-  };
-  
-  onItemPress = (id, state) => {
-    if (state == true) {
-      this.selectIds.push(id);
-    } else {
-      this.selectIds.splice(this.selectIds.indexOf(id), 1);
-    }
-    console.log(this.selectIds);
-    console.log(this.selectNames);
-    this.setState({selectNum: this.selectIds.length});
-  };
-  
-  generateSubmitParams = () => {
-    this.submitParams = [];
-    this.selectIds.forEach((item) => {
-      const paramItem = [];
-      paramItem.push(parseInt(item / 10), item % 10);
-      this.submitParams.push(paramItem);
-    });
-  };
-  
-  onSubmit = () => {
-    this.generateSubmitParams();
-    console.log(this.submitParams);
-    //todo 连接submit网络请求函数submitPartIds
-  };
-  
-  onSuccess = () => {
-    //todo showToast
-  };
-  
+
   onClose = () => {
-    this.setState({showSelectionDetail: false});
+    this.setState({showAlert: false});
   };
 }
 
@@ -254,7 +68,7 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#E6E6E6'
   },
-  buttonContainer: {
+  bottomContainer: {
     backgroundColor: '#fff',
     paddingBottom: 16,
     paddingTop: 16

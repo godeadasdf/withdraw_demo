@@ -22,7 +22,7 @@ export default class SilentBikeDetail extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
+        <View style={styles.topContainer}>
           <Text style={styles.title}>沉默车详情</Text>
           <Image style={styles.close}
                  source={require('../images/close.png')}/>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       alignSelf: 'stretch'
     },
-    titleContainer: {
+    topContainer: {
       flexDirection: 'row',
       height: 72
     },

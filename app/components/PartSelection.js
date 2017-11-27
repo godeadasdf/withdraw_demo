@@ -28,7 +28,7 @@ export default class PartSelection extends PureComponent {
   
   renderTitle = () => {
     return (
-      <View style={styles.titleContainer}>
+      <View style={styles.topContainer}>
         <View style={{
           height: 15,
           width: 4,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
-  titleContainer: {
+  topContainer: {
     flexDirection: 'row',
     marginBottom: 24,
     alignItems: 'center'

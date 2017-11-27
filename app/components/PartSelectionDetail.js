@@ -13,7 +13,7 @@ export default class PartSelectionDetail extends PureComponent {
   
   renderTitle = () => {
     return (
-      <View style={styles.titleContainer}>
+      <View style={styles.topContainer}>
         <TouchableWithoutFeedback style={{width: 40, height: 40}}
                                   onPress={this.props.onClose}>
           <Image source={require('../images/close.png')}
@@ -60,7 +60,7 @@ export default class PartSelectionDetail extends PureComponent {
   
   renderSubmitButton = () => {
     return (
-      <View style={styles.buttonContainer}>
+      <View style={styles.bottomContainer}>
         <TouchableHighlight
           style={styles.submitButton}
           onPress={() => {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignSelf: 'stretch',
   },
-  titleContainer: {
+  topContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     backgroundColor: '#fff',
