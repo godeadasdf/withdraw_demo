@@ -93,9 +93,9 @@ export default class AlertModalPureText extends Component<Props> {
       {this.props.content && this.props.content.map((item, index) => {
           let pos = item.indexOf(':');
           return <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-            <Text>
-              {item.slice(0, pos)}
-              <Text>{item.slice(pos, item.length)}</Text>
+            <Text style={{color:'#232',fontSize:23}}>
+              {item.slice(0, pos+1)}
+              <Text style={{color:'#123',fontSize:19}}>{item.slice(pos+1, item.length)}</Text>
             </Text>
           </View>;
         }
